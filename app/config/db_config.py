@@ -30,7 +30,31 @@ def get_mongo_db():
         return None
 
 # Initialize MongoDB instance once
-mongo_db = get_mongo_db()
+# mongo_db = get_mongo_db()
 
-db = mongo_db["data"]
-product_collection = db["product_data"]
+# db = mongo_db["data"]
+# product_collection = db["product_data"]
+
+def init_db():
+    conn = get_pg_connection()
+    if not conn:
+        return
+
+    try:
+        cur = conn.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(100),
+                email VARCHAR(150) UNIQUE NOT NULL,
+                phone_number VARCHAR(20),
+                password TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        conn.commit()
+    except Exception as e:
+        print(f"Error creating table: {e}")
+    finally:
+        cur.close()
+        conn.close()
