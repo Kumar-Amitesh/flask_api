@@ -1,0 +1,12 @@
+flask
+flask-cors
+flask-bcrypt
+flask-jwt-extended
+python-dotenv
+psycopg2-binary
+pymongo
+opencv-python-headless
+numpy
+pyzbar
+pytesseract
+pillow
