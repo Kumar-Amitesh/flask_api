@@ -30,10 +30,10 @@ def get_mongo_db():
         return None
 
 # Initialize MongoDB instance once
-# mongo_db = get_mongo_db()
+mongo_db = get_mongo_db()
 
-# db = mongo_db["data"]
-# product_collection = db["product_data"]
+db = mongo_db["data"]
+product_collection = db["itemcategories"]
 
 def init_db():
     conn = get_pg_connection()
